@@ -7,8 +7,10 @@
 
 **General**
 
-Mejorar la seguridad de la institución creando un sistema de control de acceso, implementando nuevas tecnologías en el ingreso y salida de la institución y así prevenir el ingreso que terceros no deseados entren a la institución.
+Mejorar la seguridad de la institución creando un sistema de control de acceso, implementando nuevas tecnologías en el ingreso y salida de la institución y así prevenir el ingreso que terceros no deseados entren a la institución
+
 **Específicos**
+
 
  1. Implementar torniquetes de seguridad nos ayudará a controlar el ingreso a la institución aparte de tener una base de datos completa, de las personas que ingresan a la institución.
  2.  Incluir carnets con chip, los cuales sólo portarán personas de la institución como una medida mas de seguridad par el ingreso.
