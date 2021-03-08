@@ -1,0 +1,273 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.4
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 04-03-2021 a las 17:12:16
+-- Versión del servidor: 10.4.17-MariaDB
+-- Versión de PHP: 7.3.26
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de datos: `proyecto1`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `acudiente`
+--
+
+CREATE TABLE `acudiente` (
+  `Usuarios_Nu_doc` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `administrador`
+--
+
+CREATE TABLE `administrador` (
+  `Usuarios_Nu_doc` int(11) NOT NULL,
+  `Contrato_idContrato` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `contrato`
+--
+
+CREATE TABLE `contrato` (
+  `idContrato` int(11) NOT NULL,
+  `Estado_cont` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `curso`
+--
+
+CREATE TABLE `curso` (
+  `idCurso` int(11) NOT NULL,
+  `Estado_cur` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `curso`
+--
+
+INSERT INTO `curso` (`idCurso`, `Estado_cur`) VALUES
+(202, 'activo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `docente`
+--
+
+CREATE TABLE `docente` (
+  `Usuarios_Nu_doc` int(11) NOT NULL,
+  `Usuarios_Pregun_seguridad_Codigo_pregun` int(11) NOT NULL,
+  `Contrato_idContrato` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estudiante`
+--
+
+CREATE TABLE `estudiante` (
+  `Usuarios_Nu_doc` int(11) NOT NULL,
+  `Matricula_idMatricula` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `estudiante_has_acudiente`
+--
+
+CREATE TABLE `estudiante_has_acudiente` (
+  `Estudiante_Usuarios_Nu_doc` int(11) NOT NULL,
+  `Acudiente_Usuarios_Nu_doc` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `huellas`
+--
+
+CREATE TABLE `huellas` (
+  `idHuellas` int(11) NOT NULL,
+  `Huella` int(11) NOT NULL,
+  `Fecha_act` datetime NOT NULL,
+  `Fecha_inact` datetime NOT NULL,
+  `Usuarios_Rol_idRol` int(11) NOT NULL,
+  `Usuarios_Nu_doc` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `jornada`
+--
+
+CREATE TABLE `jornada` (
+  `idJornada` int(11) NOT NULL,
+  `Hora_entry` varchar(45) NOT NULL,
+  `Hora_exit` varchar(45) NOT NULL,
+  `Estado_jor` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `marcacion`
+--
+
+CREATE TABLE `marcacion` (
+  `idMarcacion` int(11) NOT NULL,
+  `Hora_entry` datetime NOT NULL,
+  `Hora_exit` datetime NOT NULL,
+  `Usuarios_Nu_doc` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `matricula`
+--
+
+CREATE TABLE `matricula` (
+  `idMatricula` int(11) NOT NULL,
+  `Estado` varchar(45) NOT NULL,
+  `Jornada_idJornada` int(11) NOT NULL,
+  `Curso_idCurso` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pregun_seguridad`
+--
+
+CREATE TABLE `pregun_seguridad` (
+  `Codigo_pregun` int(8) NOT NULL,
+  `Pregunta` varchar(85) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rol`
+--
+
+CREATE TABLE `rol` (
+  `idRol` int(4) NOT NULL,
+  `Rol` varchar(45) NOT NULL,
+  `Estado_rol` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `Nu_doc` int(11) NOT NULL,
+  `Tipo_doc` varchar(45) NOT NULL,
+  `Primer_nom` varchar(45) NOT NULL,
+  `Segundo_nom` varchar(45) NOT NULL,
+  `Primer_ape` varchar(45) NOT NULL,
+  `Segundo_ape` varchar(45) NOT NULL,
+  `Num_tel` varchar(45) NOT NULL,
+  `Password` varchar(45) NOT NULL,
+  `Answer` varchar(45) NOT NULL,
+  `Pregun_seguridad_Codigo_pregun` int(11) NOT NULL,
+  `Rol_idRol` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`Nu_doc`, `Tipo_doc`, `Primer_nom`, `Segundo_nom`, `Primer_ape`, `Segundo_ape`, `Num_tel`, `Password`, `Answer`, `Pregun_seguridad_Codigo_pregun`, `Rol_idRol`) VALUES
+(1001048569, 'Cédula', 'Miryan', 'Vanessa', 'Bejarano', 'Peña', '3115489654', 'Chikis45', 'Vagancia', 456, 845);
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `contrato`
+--
+ALTER TABLE `contrato`
+  ADD PRIMARY KEY (`idContrato`);
+
+--
+-- Indices de la tabla `curso`
+--
+ALTER TABLE `curso`
+  ADD PRIMARY KEY (`idCurso`);
+
+--
+-- Indices de la tabla `docente`
+--
+ALTER TABLE `docente`
+  ADD PRIMARY KEY (`Usuarios_Pregun_seguridad_Codigo_pregun`);
+
+--
+-- Indices de la tabla `huellas`
+--
+ALTER TABLE `huellas`
+  ADD PRIMARY KEY (`idHuellas`);
+
+--
+-- Indices de la tabla `marcacion`
+--
+ALTER TABLE `marcacion`
+  ADD PRIMARY KEY (`idMarcacion`);
+
+--
+-- Indices de la tabla `matricula`
+--
+ALTER TABLE `matricula`
+  ADD PRIMARY KEY (`idMatricula`);
+
+--
+-- Indices de la tabla `pregun_seguridad`
+--
+ALTER TABLE `pregun_seguridad`
+  ADD PRIMARY KEY (`Codigo_pregun`);
+
+--
+-- Indices de la tabla `rol`
+--
+ALTER TABLE `rol`
+  ADD PRIMARY KEY (`idRol`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`Nu_doc`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
